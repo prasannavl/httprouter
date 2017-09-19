@@ -135,3 +135,6 @@ For even better scalability, the child nodes on each tree level are ordered by p
 `mchain`: https://github.com/prasannavl/mchain  
 `httprouter`: https://github.com/julienschmidt/httprouter  
 
+## Credits
+
+Thanks to `julienschmidt` for `httprouter` - mrouter is an adaptation of his fantastic work.
