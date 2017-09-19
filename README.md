@@ -10,6 +10,15 @@ In contrast to the [default mux](https://golang.org/pkg/net/http/#ServeMux) of G
 
 The router is optimized for high performance and a small memory footprint. It scales well even with very long paths and a large number of routes. A compressing dynamic trie (radix tree) structure is used for efficient matching.
 
+## Differences from httprouter
+
+- Uses `mchain` handlers.
+- Can be easily transitioned to `http` handlers by using `hconv` and `mconv` packages in mchain.
+- Doesn't have extra handlers like PanicHandler, MethodNotAllowedHandler - Use error handling instead.
+- `RecoverPanic` option recovers panics into an error automatically.
+- `HandleRedirect` will do automatic redirection. When `false`, all the other redirects will end up as appropriate http errors with redirect error codes, that can be handled by the chain above.
+- Doesn't use uppercase for the http helper methods. Use the more idiomatic TitleCase.
+
 ## Features
 
 **Only explicit matches:** With other routers, like [`http.ServeMux`](https://golang.org/pkg/net/http/#ServeMux), a requested URL path could match multiple patterns. Therefore they have some awkward pattern priority rules, like *longest match* or *first registered, first matched*. By design of this router, a request can only match exactly one or no route. As a result, there are also no unintended matches, which makes it great for SEO and improves the user experience.
